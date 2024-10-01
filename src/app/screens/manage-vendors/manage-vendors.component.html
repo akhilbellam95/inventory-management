@@ -1,0 +1,85 @@
+<div class="container">
+  <div class="form-container">
+    <form [formGroup]="vendorForm" (ngSubmit)="onSubmit()">
+      <div>
+        <label for="vendorName">Vendor Name:</label>
+        <input id="vendorName" formControlName="vendorName" />
+        <div
+          *ngIf="
+            vendorForm.get('vendorName')?.invalid &&
+            vendorForm.get('vendorName')?.touched
+          "
+          class="error-message"
+        >
+          Vendor name is required.
+        </div>
+      </div>
+
+      <div>
+        <label for="email">Email:</label>
+        <input id="email" formControlName="email" type="email" />
+        <div
+          *ngIf="
+            vendorForm.get('email')?.invalid && vendorForm.get('email')?.touched
+          "
+          class="error-message"
+        >
+          Please provide a valid email address.
+        </div>
+      </div>
+
+      <div>
+        <label for="contactNumber">Contact Number:</label>
+        <input id="contactNumber" formControlName="contactNumber" />
+        <div
+          *ngIf="
+            vendorForm.get('contactNumber')?.invalid &&
+            vendorForm.get('contactNumber')?.touched
+          "
+          class="error-message"
+        >
+          Please provide a valid 10-digit contact number.
+        </div>
+      </div>
+
+      <div>
+        <label for="address">Address:</label>
+        <textarea id="address" formControlName="address"></textarea>
+      </div>
+
+      <button type="submit" [disabled]="vendorForm.invalid">
+        {{ editingIndex !== null ? "Update Vendor" : "Add Vendor" }}
+      </button>
+    </form>
+  </div>
+
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th>Vendor Name</th>
+          <th>Email</th>
+          <th>Contact Number</th>
+          <th>Address</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let vendor of vendors; let i = index">
+          <td>{{ vendor.vendorName }}</td>
+          <td>{{ vendor.email }}</td>
+          <td>{{ vendor.contactNumber }}</td>
+          <td>{{ vendor.address }}</td>
+          <td>
+            <button class="edit-button" (click)="editVendor(i)">
+              <i class="fas fa-edit"></i>
+            </button>
+            <button class="delete-button" (click)="deleteVendor(i)">
+              <i class="fas fa-trash"></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
