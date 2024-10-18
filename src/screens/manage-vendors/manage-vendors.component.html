@@ -1,0 +1,83 @@
+<div class="container">
+  <div class="form-container">
+    <form [formGroup]="vendorForm" (ngSubmit)="onSubmit()">
+      <div>
+        <label for="name">Vendor Name:</label>
+        <input id="name" formControlName="name" />
+        <div
+          *ngIf="
+            vendorForm.get('name')?.invalid && vendorForm.get('name')?.touched
+          "
+          class="error-message"
+        >
+          Vendor name is required.
+        </div>
+      </div>
+
+      <div>
+        <label for="email">Email:</label>
+        <input id="email" formControlName="email" type="email" />
+        <div
+          *ngIf="
+            vendorForm.get('email')?.invalid && vendorForm.get('email')?.touched
+          "
+          class="error-message"
+        >
+          Please provide a valid email address.
+        </div>
+      </div>
+
+      <div>
+        <label for="phone">Contact Number:</label>
+        <input id="phone" formControlName="phone" />
+        <div
+          *ngIf="
+            vendorForm.get('phone')?.invalid && vendorForm.get('phone')?.touched
+          "
+          class="error-message"
+        >
+          Please provide a valid 10-digit contact number.
+        </div>
+      </div>
+
+      <div>
+        <label for="address">Address:</label>
+        <textarea id="address" formControlName="address"></textarea>
+      </div>
+
+      <button type="submit" [disabled]="vendorForm.invalid">
+        {{ editingIndex !== null ? "Update Vendor" : "Add Vendor" }}
+      </button>
+    </form>
+  </div>
+
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th>Vendor Name</th>
+          <th>Email</th>
+          <th>Phone Number</th>
+          <th>Address</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let vendor of vendors; let i = index">
+          <td>{{ vendor.name }}</td>
+          <td>{{ vendor.email }}</td>
+          <td>{{ vendor.phone }}</td>
+          <td>{{ vendor.address }}</td>
+          <td>
+            <button class="edit-button" (click)="editVendor(i)">
+              <i class="fas fa-edit"></i>
+            </button>
+            <button class="delete-button" (click)="deleteVendor(i)">
+              <i class="fas fa-trash"></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

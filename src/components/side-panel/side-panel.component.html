@@ -1,0 +1,27 @@
+<!-- side-panel.component.html -->
+<div class="side-panel" [ngClass]="{ open: isOpen }">
+  <button class="close-btn" (click)="togglePanel()">Close</button>
+  <!-- <h2>Menu</h2> -->
+  <ul>
+    <li><a routerLink="/dashboard" (click)="togglePanel()">Dashboard</a></li>
+    <li>
+      <a routerLink="/manage-services" (click)="togglePanel()"
+        >Manage Services</a
+      >
+    </li>
+    <li>
+      <a routerLink="/manage-categories" (click)="togglePanel()"
+        >Manage Categories</a
+      >
+    </li>
+
+    <li>
+      <a routerLink="/manage-products" (click)="togglePanel()"
+        >Manage Products</a
+      >
+    </li>
+    <li>
+      <a routerLink="/manage-vendors" (click)="togglePanel()">Manage Vendors</a>
+    </li>
+  </ul>
+</div>

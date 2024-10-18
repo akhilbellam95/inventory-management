@@ -1,0 +1,56 @@
+<mat-card class="product-card" appearance="outlined">
+  <mat-card-header>
+    <mat-card-title>Add New Product</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <form class="product-form" [formGroup]="productForm">
+      <mat-form-field class="example-full-width">
+        <mat-label for="name">Product name</mat-label>
+        <mat-icon matPrefix>inventory_2</mat-icon>
+        <input id="name" matInput formControlName="name" />
+      </mat-form-field>
+      <br />
+      <mat-form-field class="example-full-width">
+        <mat-label>Product Description</mat-label>
+        <input matInput formControlName="description" />
+      </mat-form-field>
+      <br />
+      <mat-form-field class="example-full-width">
+        <mat-label>Price</mat-label>
+        <input matInput formControlName="price" />
+      </mat-form-field>
+      <br />
+      <mat-form-field class="example-full-width">
+        <mat-label>Category</mat-label>
+        <mat-select
+          formControlName="categoryName"
+          (selectionChange)="onCategorySelectionChange($event)"
+        >
+          <mat-option *ngFor="let category of categories" [value]="category">
+            {{ category.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <br />
+    </form>
+  </mat-card-content>
+  <mat-card-footer>
+    <button
+      (click)="onSubmit()"
+      mat-flat-button
+      style="background-color: #4caf50"
+    >
+      Add Product
+    </button>
+  </mat-card-footer>
+</mat-card>
+
+<mat-list>
+  <h3 mat-subheader>Product List</h3>
+  <mat-list-item *ngFor="let product of products">
+    <span matListItemTitle>{{ product.name }}</span>
+    <span matListItemSecondaryText>{{ product.categoryName }}</span>
+    <span matListItemLine>{{ product.description }}</span>
+    <span matListItemLine>Price: ${{ product.price }}</span>
+  </mat-list-item>
+</mat-list>
